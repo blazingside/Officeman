@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>30 วินาที รู้เลยว่าควรเรียนคอร์สไหน | OFFICEMAN Excel + AI</title>
+<meta name="description" content="ตอบ 4 ข้อ OFFICEMAN แนะนำคอร์ส Excel + AI ที่เหมาะกับงานของคุณ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-deep:#0F3D2E;   /* Deep Forest Green */
+    --forest:#2E7D4F;        /* Forest Green */
+    --sage:#E7F1E9;          /* Sage Green */
+    --ivory:#FAF7EF;         /* Warm Ivory */
+    --white:#FFFFFF;
+    --amber:#FFC107;         /* Amber Yellow */
+    --amber-deep:#8A6400;
+    --charcoal:#1A1A1A;
+    --ink-soft:#55655B;
+    --grid:#E2E5DA;
+    --radius:14px;
+    --shadow:0 8px 28px rgba(15,61,46,.12);
+    --font-th:'Prompt', sans-serif;
+    --font-en:'Poppins', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:var(--font-th);
+    background:var(--ivory);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:44px 44px;
+    color:var(--charcoal);
+    min-height:100vh;
+    line-height:1.65;
+  }
+  .wrap{max-width:520px; margin:0 auto; padding:20px 16px 80px;}
+
+  /* ── Brand wordmark ─────────────────────── */
+  .wordmark{
+    font-family:var(--font-en); font-weight:800; letter-spacing:.5px;
+    display:inline-flex; align-items:center; gap:6px; line-height:1;
+  }
+  .wordmark .dash{
+    display:inline-block; width:22px; height:5px;
+    background:var(--amber); border-radius:2px;
+  }
+
+  /* ── Sheet chrome ───────────────────────── */
+  .sheet{
+    background:var(--white);
+    border:1px solid var(--grid);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .sheet-bar{
+    display:flex; align-items:center; gap:10px;
+    background:var(--forest-deep);
+    color:#fff;
+    padding:12px 16px;
+    font-size:15px;
+  }
+  .sheet-bar .fname{
+    margin-left:auto; opacity:.7; font-size:12px;
+    font-family:var(--font-en); font-weight:500;
+  }
+  .fx-bar{
+    display:flex; align-items:center; gap:10px;
+    background:var(--sage);
+    border-bottom:1px solid var(--grid);
+    padding:8px 14px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    white-space:nowrap; overflow:hidden;
+  }
+  .fx-bar .fx{
+    font-family:var(--font-en); font-weight:700; color:var(--forest);
+    border:1px solid var(--grid); background:#fff;
+    border-radius:6px; padding:1px 8px; flex:none; font-size:12px;
+  }
+  .fx-bar code{font-family:var(--font-th); font-weight:500; color:var(--charcoal); overflow:hidden; text-overflow:ellipsis;}
+  .fx-bar .ai-token{color:var(--forest); font-weight:700;}
+  .sheet-body{padding:22px 20px 26px;}
+
+  /* ── Intro ──────────────────────────────── */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12.5px; font-weight:600;
+    color:var(--forest-deep); background:var(--sage);
+    padding:4px 14px; border-radius:99px; margin-bottom:14px;
+  }
+  h1{
+    font-size:29px; line-height:1.35; font-weight:800; margin-bottom:6px;
+    color:var(--forest-deep);
+  }
+  h1 .ai{color:var(--charcoal);}
+  .h-dash{width:56px; height:6px; background:var(--amber); border-radius:3px; margin:10px 0 14px;}
+  .lede{color:var(--ink-soft); font-size:15.5px; margin-bottom:22px;}
+  .meta-row{display:flex; gap:10px; margin-bottom:24px;}
+  .meta-cell{
+    flex:1; text-align:center;
+    border:1px solid var(--grid); border-radius:10px;
+    padding:10px 6px; background:var(--ivory);
+  }
+  .meta-cell b{display:block; font-family:var(--font-en); font-weight:700; font-size:19px; color:var(--forest-deep);}
+  .meta-cell span{font-size:12px; color:var(--ink-soft);}
+
+  .btn{
+    display:block; width:100%;
+    font-family:var(--font-th); font-weight:700; font-size:17px;
+    border:none; border-radius:12px; padding:15px 18px;
+    cursor:pointer; text-align:center; text-decoration:none;
+    transition:transform .12s ease;
+  }
+  .btn:active{transform:scale(.985);}
+  .btn-primary{background:var(--forest); color:#fff; box-shadow:0 6px 18px rgba(46,125,79,.35);}
+  .btn-amber{background:var(--amber); color:var(--charcoal); box-shadow:0 6px 18px rgba(255,193,7,.4);}
+  .btn-ghost{background:#fff; color:var(--forest-deep); border:1.5px solid var(--forest);}
+  .btn + .btn{margin-top:10px;}
+  .btn:focus-visible, .opt:focus-visible{outline:3px solid var(--amber-deep); outline-offset:2px;}
+
+  /* ── Quiz ───────────────────────────────── */
+  .progress-row{display:flex; gap:6px; margin-bottom:18px;}
+  .progress-cell{
+    flex:1; height:10px; border-radius:4px;
+    border:1px solid var(--grid); background:#fff;
+  }
+  .progress-cell.done{background:var(--amber); border-color:var(--amber);}
+  .q-label{
+    font-family:var(--font-en); font-size:12px; font-weight:700;
+    letter-spacing:1px; color:var(--forest); margin-bottom:6px; text-transform:uppercase;
+  }
+  .q-title{font-size:20px; font-weight:700; line-height:1.45; margin-bottom:18px; color:var(--forest-deep);}
+  .opt{
+    display:flex; align-items:stretch; width:100%;
+    background:#fff; border:1.5px solid var(--grid); border-radius:12px;
+    margin-bottom:10px; cursor:pointer; text-align:left;
+    font-family:var(--font-th); font-size:15.5px; color:var(--charcoal);
+    overflow:hidden; padding:0;
+    transition:border-color .12s ease, transform .12s ease;
+  }
+  .opt:active{transform:scale(.985);}
+  .opt:hover{border-color:var(--forest);}
+  .opt .col{
+    flex:none; width:44px; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:16px;
+    background:var(--sage); color:var(--forest-deep);
+    border-right:1px solid var(--grid);
+  }
+  .opt .txt{padding:13px 14px; line-height:1.5;}
+  .step-anim{animation:slideIn .28s ease both;}
+  @keyframes slideIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  @media (prefers-reduced-motion: reduce){
+    .step-anim{animation:none;}
+    .btn, .opt{transition:none;}
+  }
+
+  /* ── Result ─────────────────────────────── */
+  .result-code{
+    display:inline-block; font-family:var(--font-en); font-weight:700;
+    font-size:13px; letter-spacing:1.5px;
+    background:var(--charcoal); color:var(--amber);
+    padding:4px 14px; border-radius:6px; margin-bottom:12px;
+  }
+  .result-name{font-size:25px; font-weight:800; line-height:1.35; margin-bottom:4px; color:var(--forest-deep);}
+  .result-sub{color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;}
+  .price-line{display:flex; align-items:baseline; gap:10px; margin-bottom:4px; flex-wrap:wrap;}
+  .price{font-family:var(--font-en); font-size:40px; font-weight:800; color:var(--forest-deep);}
+  .price small{font-family:var(--font-th); font-size:16px; font-weight:600;}
+  .save-badge{
+    font-size:13px; font-weight:700; color:var(--charcoal);
+    background:var(--amber);
+    padding:3px 12px; border-radius:99px;
+  }
+  .date-line{font-size:14.5px; color:var(--ink-soft); margin-bottom:18px;}
+  .why-box{
+    background:var(--sage); border-radius:12px;
+    border-left:5px solid var(--amber);
+    padding:14px 16px; margin-bottom:20px; font-size:14.5px;
+  }
+  .why-box b{color:var(--forest-deep);}
+  .why-box ul{margin:6px 0 0 18px;}
+  .why-box li{margin-bottom:4px;}
+  .hint{font-size:13px; color:var(--ink-soft); text-align:center; margin-top:10px;}
+
+  .section{margin-top:26px;}
+  .section-title{
+    font-size:16px; font-weight:700;
+    color:var(--forest-deep);
+    display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  }
+  .section-title::before{content:""; width:20px; height:5px; background:var(--amber); border-radius:2px; flex:none;}
+  .section-title::after{content:""; flex:1; height:1px; background:var(--grid);}
+  .benefit-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .benefit{
+    background:#fff; border:1px solid var(--grid); border-radius:10px;
+    padding:10px 12px; font-size:13.5px; line-height:1.5;
+    display:flex; gap:8px; align-items:flex-start;
+  }
+  .benefit .tick{color:var(--forest); font-weight:700; flex:none;}
+
+  /* instructor */
+  .coach{
+    background:var(--forest-deep); color:#fff;
+    border-radius:14px; padding:18px 18px 16px;
+  }
+  .coach-top{display:flex; gap:14px; align-items:center; margin-bottom:12px;}
+  .coach-avatar{
+    flex:none; width:64px; height:64px; border-radius:50%;
+    background:var(--amber); color:var(--forest-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:18px;
+    overflow:hidden;
+  }
+  .coach-avatar img{width:100%; height:100%; object-fit:cover;}
+  .coach-name{font-size:17px; font-weight:700; line-height:1.4;}
+  .coach-role{font-size:12.5px; color:var(--amber); font-weight:600;}
+  .coach-cred{
+    font-size:13px; font-weight:600; color:#fff;
+    background:rgba(255,193,7,.16); border:1px solid rgba(255,193,7,.45);
+    border-radius:10px; padding:8px 12px; margin-bottom:12px; line-height:1.5;
+  }
+  .coach-quote{
+    font-size:13.5px; color:rgba(255,255,255,.85);
+    border-left:3px solid var(--amber); padding-left:12px; margin-bottom:12px;
+  }
+
+  /* ── Calendar ── */
+  .cal{
+    background:#fff; border:1px solid var(--grid); border-radius:12px;
+    padding:14px 12px 12px; overflow:hidden;
+  }
+  .cal-head{
+    text-align:center; font-weight:700; font-size:15.5px;
+    color:var(--forest-deep); margin-bottom:10px;
+  }
+  .cal-grid{
+    display:grid; grid-template-columns:repeat(7,1fr); gap:4px;
+  }
+  .cal-dow{
+    text-align:center; font-size:11px; font-weight:600;
+    color:var(--ink-soft); padding:2px 0;
+  }
+  .cal-dow.sun{color:#C0392B;}
+  .cal-day{
+    aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-en); font-weight:600; font-size:13px;
+    border-radius:8px; color:var(--charcoal); background:var(--ivory);
+    position:relative;
+  }
+  .cal-day.empty{background:transparent;}
+  .cal-day.ev-c1{background:var(--forest); color:#fff; box-shadow:0 3px 8px rgba(46,125,79,.35);}
+  .cal-day.ev-c2{background:var(--amber); color:var(--charcoal); box-shadow:0 3px 8px rgba(255,193,7,.4);}
+  .cal-day.ev-c1::after, .cal-day.ev-c2::after{
+    content:""; position:absolute; bottom:4px; width:4px; height:4px;
+    border-radius:50%; background:currentColor; opacity:.7;
+  }
+  .cal-legend{display:flex; gap:14px; justify-content:center; margin-top:10px; flex-wrap:wrap;}
+  .cal-legend span{font-size:12px; color:var(--ink-soft); display:flex; align-items:center; gap:6px;}
+  .cal-legend i{width:12px; height:12px; border-radius:4px; display:inline-block;}
+  .cal-legend .k1{background:var(--forest);}
+  .cal-legend .k2{background:var(--amber);}
+  .cal-list{margin-top:12px; border-top:1px dashed var(--grid); padding-top:10px;}
+  .cal-item{
+    display:flex; gap:10px; align-items:center;
+    font-size:13.5px; padding:5px 2px;
+  }
+  .cal-item .d{
+    flex:none; width:34px; height:34px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-en); font-weight:700; font-size:14px;
+  }
+  .cal-item.ev-c1 .d{background:var(--forest); color:#fff;}
+  .cal-item.ev-c2 .d{background:var(--amber); color:var(--charcoal);}
+  .cal-item .t{color:var(--ink-soft); font-size:12px; margin-left:auto; flex:none;}
+  .coach-chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .coach-chip{
+    font-size:11.5px; font-weight:500;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+    padding:3px 10px; border-radius:99px;
+  }
+
+  details.qa{
+    background:#fff; border:1px solid var(--grid); border-radius:10px;
+    margin-bottom:8px; overflow:hidden;
+  }
+  details.qa summary{
+    list-style:none; cursor:pointer; padding:13px 16px;
+    font-weight:600; font-size:15px; color:var(--forest-deep);
+    display:flex; justify-content:space-between; gap:12px; align-items:center;
+  }
+  details.qa summary::-webkit-details-marker{display:none;}
+  details.qa summary::after{
+    content:"+"; font-family:var(--font-en); font-weight:700;
+    color:var(--forest); font-size:18px; flex:none;
+  }
+  details.qa[open] summary::after{content:"−";}
+  details.qa .a{padding:0 16px 14px; font-size:14.5px; color:var(--ink-soft);}
+  .todo{background:#FFF3CD; border-radius:4px; padding:0 4px;}
+
+  /* image modal */
+  .modal{
+    position:fixed; inset:0; background:rgba(15,61,46,.78);
+    display:none; align-items:center; justify-content:center;
+    padding:20px; z-index:50;
+  }
+  .modal.show{display:flex;}
+  .modal-inner{background:#fff; border-radius:14px; padding:16px; max-width:360px; width:100%;}
+  .modal-inner img{width:100%; border-radius:8px; border:1px solid var(--grid); display:block;}
+  .modal-inner p{font-size:13.5px; text-align:center; color:var(--ink-soft); margin:10px 0;}
+  .footer-note{text-align:center; font-size:12px; color:var(--ink-soft); margin-top:22px;}
+  .footer-note b{color:var(--forest-deep);}
+  .hidden{display:none !important;}
+  .toast{
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+    background:var(--charcoal); color:#fff; font-size:14px;
+    padding:10px 18px; border-radius:99px; opacity:0;
+    transition:opacity .2s ease; pointer-events:none; z-index:60;
+  }
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sheet">
+    <div class="sheet-bar">
+      <span class="wordmark" style="font-size:16px;">OFFICE<span class="dash"></span>MAN</span>
+      <span class="fname">quiz.xlsx</span>
+    </div>
+    <div class="fx-bar">
+      <span class="fx">fx</span>
+      <code id="fxFormula">=<span class="ai-token">แนะนำคอร์ส</span>( ระดับ, งาน, ปัญหา, บทบาท )</code>
+    </div>
+
+    <div class="sheet-body" id="app">
+
+      <!-- ── STEP: INTRO ── -->
+      <div id="viewIntro" class="step-anim">
+        <span class="eyebrow">แบบประเมินก่อนลงเรียน</span>
+        <h1>ควรเรียนคอร์สไหนดี?<br>Excel + <span class="ai">AI</span> ตอบให้ใน 30 วิ</h1>
+        <div class="h-dash"></div>
+        <p class="lede">ตอบ 4 ข้อสั้นๆ ระบบจะแนะนำคอร์สที่ตรงกับงานของคุณที่สุด พร้อมเหตุผลว่าทำไม — สูตรลับ • เข้าใจง่าย • ใช้ได้จริง</p>
+        <div class="meta-row">
+          <div class="meta-cell"><b>4</b><span>คำถาม</span></div>
+          <div class="meta-cell"><b>30 วิ</b><span>เวลาที่ใช้</span></div>
+          <div class="meta-cell"><b>ฟรี</b><span>ไม่ต้องกรอกอะไร</span></div>
+        </div>
+        <button class="btn btn-primary" onclick="startQuiz()">เริ่มทำแบบประเมิน →</button>
+        <p class="hint">ท้ายผลลัพธ์มีคำตอบครบ: เวอร์ชัน Excel ที่ใช้ • เรียนด้วย Mac ได้ไหม • วิธีสมัครและชำระเงิน</p>
+      </div>
+
+      <!-- ── STEP: QUIZ ── -->
+      <div id="viewQuiz" class="hidden">
+        <div class="progress-row" id="progressRow"></div>
+        <div id="questionBox"></div>
+      </div>
+
+      <!-- ── STEP: RESULT ── -->
+      <div id="viewResult" class="hidden"></div>
+
+    </div>
+  </div>
+  <p class="footer-note"><b>OFFICEMAN</b> — Work Smarter. Every Day.<br>เรียนสดผ่าน Zoom • มีวิดีโอย้อนหลังทุกคอร์ส<br>🔒 เว็บนี้ไม่ขอข้อมูลส่วนตัวและไม่มีช่องทางชำระเงินบนหน้าเว็บ — ยืนยันยอดผ่านแชทเพจ ออฟฟิศแมน เท่านั้น</p>
+</div>
+
+<!-- image save modal -->
+<div class="modal" id="imgModal" role="dialog" aria-modal="true">
+  <div class="modal-inner">
+    <img id="resultImg" alt="รูปสรุปผลการประเมิน">
+    <p>📱 <b>กดค้างที่รูป</b> แล้วเลือก “บันทึกรูปภาพ”<br>(หรือแคปหน้าจอก็ได้ครับ)<br>จากนั้นส่งรูปนี้มาในแชทได้เลย</p>
+    <button class="btn btn-ghost" onclick="closeModal()">ปิดหน้าต่างนี้</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIG — แก้ข้อมูลทั้งหมดได้ที่จุดเดียวตรงนี้
+   ═══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  monthLabel: "สิงหาคม 2569",                    // ⚠️ เดือนที่เปิดคอร์ส
+  instructorPhoto: "",                           // ใส่ URL รูปอาจารย์ได้ เช่น "man.jpg" (เว้นว่าง = โชว์ตัวย่อ)
+  courses: {
+    "EXAI-1": {
+      name: "คอร์ส 1 — สูตรทำมาหากิน Excel + AI",
+      sub: "Level 1–3 • ปูพื้นให้แน่น ทำ Dashboard และ Report เร็วขึ้น",
+      price: "1,890", save: "",
+      date: "เลือกเรียน 1 วัน: อาทิตย์ที่ 2 หรือ 9 • 10.00–15.00 น.",
+      chat: "สนใจคอร์ส 1 (EXAI-1) สะดวกเรียนวันที่ [2 หรือ 9] ครับ/ค่ะ",
+    },
+    "EXAI-2": {
+      name: "คอร์ส 2 — Excel สำหรับ Manager",
+      sub: "Level 3–4 • Power Query รวมไฟล์อัตโนมัติ ออกแบบระบบให้ทีม",
+      price: "2,190", save: "",
+      date: "วันอาทิตย์ที่ 16 • 10.00–15.00 น.",
+      chat: "สนใจคอร์ส 2 (EXAI-2) ครับ/ค่ะ",
+    },
+    "EXAI-DUO": {
+      name: "แพ็คคู่ — เรียนครบทั้ง 2 คอร์ส",
+      sub: "ปูพื้นจากคอร์ส 1 แล้วต่อยอดเป็นระบบในคอร์ส 2",
+      price: "3,490", save: "ประหยัด 590 บาท",
+      date: "เรียนแค่ 2 วัน: คอร์ส 1 เลือกวันที่ 2 หรือ 9 + คอร์ส 2 วันที่ 16",
+      chat: "สนใจแพ็คคู่ (EXAI-DUO) คอร์ส 1 สะดวกวันที่ [2 หรือ 9] ครับ/ค่ะ",
+    },
+  },
+  instructor: {
+    name: "โชคตระกูล เคียร์ซฟิ้งค์ (อ.แมน)",
+    role: "เจ้าของเพจ ออฟฟิศแมน • ผู้ติดตาม 260K+ บน Facebook / TikTok / Instagram",
+    cred: "อดีตผู้จัดการจากองค์กรค้าปลีกระดับมหาชน — Decathlon • Central • Power Buy • KKV",
+    quote: "เน้นสอนจากเคสงานจริง ทำเรื่องซับซ้อนให้เป็นขั้นตอนที่เข้าใจง่าย และนำไปใช้ได้ทันที",
+    chips: ["Retail • Marketing • Operations • Data", "In-house Training & Consulting หลายองค์กร"],
+  },
+  // ⚠️ ตารางอบรม — แก้เดือน/ปี และวันเรียนได้ตรงนี้
+  // month: 1-12 (8 = สิงหาคม), year เป็น ค.ศ.
+  schedule: {
+    month: 8, year: 2026,
+    note: "คอร์ส 1 เปิด 2 รอบ เนื้อหาเดียวกัน เลือกเรียนวันไหนก็ได้",
+    events: {
+      2:  { code: "c1", label: "คอร์ส 1 — รอบวันที่ 2", time: "10.00–15.00 น." },
+      9:  { code: "c1", label: "คอร์ส 1 — รอบวันที่ 9", time: "10.00–15.00 น." },
+      16: { code: "c2", label: "คอร์ส 2 (วันเดียวจบ)",  time: "10.00–15.00 น." },
+    },
+  },
+  // รีวิวผู้เรียน — คัดจากแบบประเมินจริง เฉพาะที่อนุญาตเผยแพร่
+  reviewStat: "ความพึงพอใจเฉลี่ย 4.7/5 จากผู้เรียนรอบล่าสุด (14 ใน 19 คนให้คะแนนเต็ม)",
+  reviews: [
+    { text: "เมื่อก่อนฟังจากคนอื่นไม่เคยรู้เรื่องเลย ตามไม่ทัน แต่อาจารย์สอนเข้าใจง่าย ไปไม่เร็ว รู้สึกเข้าถึงมากขึ้นมาก ขอบคุณมากค่ะ", name: "คุณ Nan • เรียนครบ 2 คอร์ส" },
+    { text: "ถ่ายทอดดี เข้าใจง่าย ตั้งแต่คลิปฟรียันในคอร์สค่ะ", name: "คุณหนิง • คอร์ส 2" },
+    { text: "อาจารย์สอนดีมาก เข้าใจง่าย อธิบายชัดเจน ทำให้เห็นมุมมองที่นำมาประยุกต์ใช้ได้จริง", name: "คุณขวัญ • เรียนครบ 2 คอร์ส" },
+    { text: "อาจารย์สอนดีมาก เข้าใจง่าย มีเทคนิคเยอะ", name: "ผู้เรียนคอร์ส 1" },
+  ],
+  benefits: [
+    "เรียนสดผ่าน Zoom", "ถามตอบได้ตลอดคลาส",
+    "วิดีโอย้อนหลัง", "ไฟล์ตัวอย่างทั้งหมด",
+    "Template พร้อมใช้งาน", "Workshop ทำตามได้ทุกขั้นตอน",
+  ],
+  // Q&A — คำตอบครบแล้ว แก้เพิ่มได้ตรงนี้
+  qa: [
+    { q: "ไม่มีพื้นฐานเลย เรียนได้ไหม?",
+      a: "ได้ครับ คอร์ส 1 ออกแบบมาสำหรับมือใหม่ สอนตั้งแต่เข้าใจโครงสร้างข้อมูล ไปจนถึงทำ Dashboard ได้จริง ทุกขั้นตอนเป็น Workshop ทำตามไปพร้อมกัน" },
+    { q: "ข้ามไปเรียนคอร์ส 2 เลยได้ไหม?",
+      a: "ได้ ถ้าคุณใช้สูตรพื้นฐานและ PivotTable คล่องแล้ว แต่ถ้ายังไม่มั่นใจ แนะนำแพ็คคู่ เพราะคอร์ส 2 ต่อยอดจากพื้นฐานในคอร์ส 1 โดยตรง" },
+    { q: "เรียนสดไม่ทัน / ติดธุระวันเรียน ทำยังไง?",
+      a: "ไม่พลาดเนื้อหาแน่นอนครับ วิดีโอย้อนหลังจะส่งให้<b>ภายใน 2 วันหลังอบรม</b> พร้อมไฟล์ Workshop ทั้งหมด ดูซ้ำและทำตามได้ทุกขั้นตอน" },
+    { q: "ต้องใช้ Excel เวอร์ชันไหน? ใช้ Mac ได้ไหม?",
+      a: "แนะนำ <b>Excel 2021 ขึ้นไป หรือ Microsoft 365</b> • ผู้ใช้ Mac: <b>คอร์ส 1 เรียนได้เต็มรูปแบบ</b> ส่วนคอร์ส 2 แนะนำให้ใช้ Microsoft 365 เพราะ Power Query บน Excel 2021 ของ Mac มีข้อจำกัด (เมนูบางจุดอาจต่างจากในคลาสเล็กน้อย ทีมงานช่วยไกด์ให้ได้ครับ)" },
+    { q: "AI ที่ใช้ในคอร์ส ต้องเสียเงินเพิ่มไหม?",
+      a: "<b>ไม่ต้องครับ ทั้ง 2 คอร์สเรียนด้วย AI เวอร์ชันฟรีได้ครบทุก Workshop</b> แนะนำให้สมัครไว้ล่วงหน้าทั้ง 4 ตัว: ChatGPT, Gemini, Claude และ Copilot (ฟรีทุกตัว) • ถ้าหลังเรียนอยากใช้ทำงานจริงแบบต่อเนื่อง เวอร์ชันเสียเงินจะทำงานได้ลื่นกว่า แต่ไม่บังคับ เลือกอัปเกรดทีหลังได้เสมอ" },
+    { q: "สมัครและชำระเงินยังไง?",
+      a: "ง่ายมาก 3 ขั้นตอนครับ: <b>1)</b> แจ้งรหัสคอร์สที่ต้องการในแชท <b>2)</b> ทีมงานสรุปยอดและช่องทางโอน (PromptPay) ให้ทันที <b>3)</b> ส่งสลิปพร้อมชื่อ อีเมล และเบอร์โทร เป็นอันจองที่นั่งสำเร็จ รอรับลิงก์ Zoom ก่อนวันเรียนได้เลย" },
+  ],
+};
+
+/* ── Questions & scoring ── */
+const QUESTIONS = [
+  { label:"Q1 / 4", fx:"ระดับ",
+    title:"ตอนนี้คุณใช้ Excel อยู่ระดับไหน?",
+    opts:[
+      {t:"พอใช้ได้ แต่สูตรยังไม่คล่อง ต้องหาใน Google บ่อยๆ", s:[2,0]},
+      {t:"ใช้ VLOOKUP / PivotTable ในงานประจำอยู่แล้ว อยากไปขั้นต่อไป", s:[0,2]},
+      {t:"ใช้ทุกวัน แต่รู้สึกว่ายังทำงานช้ากว่าที่ควร", s:[1,1]},
+    ]},
+  { label:"Q2 / 4", fx:"งาน",
+    title:"งานหลักที่คุณต้องทำกับ Excel คืออะไร?",
+    opts:[
+      {t:"ทำ Report / Dashboard จากข้อมูลของตัวเอง", s:[2,0]},
+      {t:"รวมข้อมูลหลายไฟล์ หลาย Sheet จากทีมหรือหลายเดือน", s:[0,2]},
+      {t:"ทั้งสองอย่างเลย", s:[1,1]},
+    ]},
+  { label:"Q3 / 4", fx:"ปัญหา",
+    title:"ปัญหาที่อยากแก้ให้ได้มากที่สุด?",
+    opts:[
+      {t:"ทำ Report ช้า อยากเข้าใจสูตรและใช้ AI ช่วยให้เร็วขึ้น", s:[2,0]},
+      {t:"เสียเวลา copy-paste รวมไฟล์รายเดือนซ้ำๆ ทุกเดือน", s:[0,2]},
+      {t:"ข้อมูลจากทีมผิด format บ่อย อยากมีระบบป้องกัน", s:[0,2]},
+    ]},
+  { label:"Q4 / 4", fx:"บทบาท",
+    title:"บทบาทของคุณตอนนี้ใกล้เคียงข้อไหน?",
+    opts:[
+      {t:"พนักงาน / เจ้าหน้าที่ ที่ลงมือทำข้อมูลเอง", s:[2,0]},
+      {t:"Manager / หัวหน้าทีม / เจ้าของธุรกิจ", s:[0,2]},
+      {t:"กำลังอัปสกิลเพื่อโตในสายงานหรือเปลี่ยนงาน", s:[1,1]},
+    ]},
+];
+
+let step = 0;
+let score = [0,0];
+let answers = [];
+
+/* ── ช่องทางที่ส่งลิงก์ ──
+   ลิงก์ปกติ (หรือ ?ch=fb) = ลูกค้าจาก Facebook → ปุ่มพาเข้า Messenger
+   ลิงก์ ?ch=tt            = ลูกค้าจาก TikTok  → แนะนำให้กลับไปส่งในแชท TikTok เดิม */
+const CH = new URLSearchParams(location.search).get("ch") === "tt" ? "tt" : "fb";
+
+const $ = id => document.getElementById(id);
+const thaiCols = ["ก","ข","ค"];
+
+function startQuiz(){
+  step = 0; score = [0,0]; answers = [];
+  $("viewIntro").classList.add("hidden");
+  $("viewResult").classList.add("hidden");
+  $("viewQuiz").classList.remove("hidden");
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[step];
+  $("progressRow").innerHTML = QUESTIONS.map((_,i)=>
+    `<div class="progress-cell ${i<step?"done":""}"></div>`).join("");
+  const parts = QUESTIONS.map((qq,i)=> i<step ? `"${thaiCols[answers[i]]}"` : qq.fx);
+  $("fxFormula").innerHTML = `=<span class="ai-token">แนะนำคอร์ส</span>( ${parts.join(", ")} )`;
+  $("questionBox").innerHTML = `
+    <div class="step-anim">
+      <div class="q-label">${q.label}</div>
+      <div class="q-title">${q.title}</div>
+      ${q.opts.map((o,i)=>`
+        <button class="opt" onclick="pick(${i})">
+          <span class="col">${thaiCols[i]}</span>
+          <span class="txt">${o.t}</span>
+        </button>`).join("")}
+    </div>`;
+}
+
+function pick(i){
+  const q = QUESTIONS[step];
+  score[0] += q.opts[i].s[0];
+  score[1] += q.opts[i].s[1];
+  answers.push(i);
+  step++;
+  if(step < QUESTIONS.length){ renderQuestion(); }
+  else { showResult(); }
+}
+
+function decideCode(){
+  if(score[0] >= score[1] + 3) return "EXAI-1";
+  if(score[1] >= score[0] + 3) return "EXAI-2";
+  return "EXAI-DUO";
+}
+
+function reasonsFor(code){
+  const r = [];
+  if(code==="EXAI-1"){
+    r.push("คุณต้องการความแม่นเรื่องสูตรและ Dashboard ซึ่งเป็นหัวใจของคอร์ส 1");
+    r.push("ได้ Workshop ทำสด XLOOKUP, PivotTable และใช้ AI ช่วยงานจริง");
+  } else if(code==="EXAI-2"){
+    r.push("งานของคุณคือการรวมข้อมูลหลายไฟล์ ซึ่ง Power Query ในคอร์ส 2 ตอบตรงจุด");
+    r.push("ได้ระบบ Refresh อัตโนมัติ + Template ที่ทั้งทีมใช้ต่อได้");
+  } else {
+    r.push("คำตอบของคุณมีทั้งเรื่องพื้นฐานที่อยากแน่นขึ้น และงานระบบที่ต้องรวมหลายไฟล์");
+    r.push("ใช้เวลาแค่ 2 วันอาทิตย์: คอร์ส 1 เลือกวันที่ 2 หรือ 9 แล้วต่อคอร์ส 2 วันที่ 16");
+    r.push("จ่ายครั้งเดียว ประหยัดกว่าแยกสมัคร 590 บาท");
+  }
+  return r;
+}
+
+const THAI_MONTHS = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
+  "กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+const THAI_DOW = ["อา","จ","อ","พ","พฤ","ศ","ส"];
+
+function calendarHTML(){
+  const s = CONFIG.schedule;
+  const first = new Date(s.year, s.month - 1, 1);
+  const startDow = first.getDay();                       // 0 = อาทิตย์
+  const daysInMonth = new Date(s.year, s.month, 0).getDate();
+  const beYear = s.year + 543;
+
+  let cells = THAI_DOW.map((d,i)=>`<div class="cal-dow ${i===0?"sun":""}">${d}</div>`).join("");
+  for(let i=0;i<startDow;i++) cells += `<div class="cal-day empty"></div>`;
+  for(let d=1; d<=daysInMonth; d++){
+    const ev = s.events[d];
+    cells += `<div class="cal-day ${ev?("ev-"+ev.code):""}">${d}</div>`;
+  }
+
+  const list = Object.keys(s.events).map(d=>{
+    const ev = s.events[d];
+    return `<div class="cal-item ev-${ev.code}">
+      <span class="d">${d}</span>
+      <span>${ev.label}</span>
+      <span class="t">${ev.time}</span>
+    </div>`;
+  }).join("");
+
+  return `
+    <div class="cal">
+      <div class="cal-head">ตารางอบรม ${THAI_MONTHS[s.month-1]} ${beYear}</div>
+      <div class="cal-grid">${cells}</div>
+      <div class="cal-legend">
+        <span><i class="k1"></i>คอร์ส 1</span>
+        <span><i class="k2"></i>คอร์ส 2</span>
+      </div>
+      <div class="cal-list">${list}</div>
+      ${s.note ? `<p style="font-size:12px; color:var(--ink-soft); text-align:center; margin-top:8px;">💡 ${s.note}</p>` : ""}
+    </div>`;
+}
+
+function coachHTML(){
+  const t = CONFIG.instructor;
+  const avatar = CONFIG.instructorPhoto
+    ? `<img src="${CONFIG.instructorPhoto}" alt="${t.name}">`
+    : "อ.แมน";
+  return `
+    <div class="coach">
+      <div class="coach-top">
+        <div class="coach-avatar">${avatar}</div>
+        <div>
+          <div class="coach-name">${t.name}</div>
+          <div class="coach-role">${t.role}</div>
+        </div>
+      </div>
+      <div class="coach-cred">${t.cred}</div>
+      <div class="coach-quote">${t.quote}</div>
+      <div class="coach-chips">${t.chips.map(c=>`<span class="coach-chip">${c}</span>`).join("")}</div>
+    </div>`;
+}
+
+function reviewsHTML(){
+  if(!CONFIG.reviews || CONFIG.reviews.length === 0) return "";
+  return `
+    <div class="section">
+      <div class="section-title">เสียงจากผู้เรียนรุ่นที่ผ่านมา</div>
+      ${CONFIG.reviewStat ? `<p style="font-size:13px; color:var(--ink-soft); margin-bottom:10px;">⭐ ${CONFIG.reviewStat}</p>` : ""}
+      ${CONFIG.reviews.map(r=>`
+        <div class="benefit" style="margin-bottom:8px; display:block;">
+          <div style="color:var(--amber); letter-spacing:2px; margin-bottom:2px;">★★★★★</div>
+          “${r.text}”
+          <div style="color:var(--ink-soft); font-size:12px; margin-top:4px;">— ${r.name}</div>
+        </div>`).join("")}
+    </div>`;
+}
+
+function showResult(){
+  const code = decideCode();
+  const c = CONFIG.courses[code];
+  $("viewQuiz").classList.add("hidden");
+  $("fxFormula").innerHTML = `=<span class="ai-token">แนะนำคอร์ส</span>(…) → <b>"${code}"</b>`;
+  const v = $("viewResult");
+  v.classList.remove("hidden");
+  v.innerHTML = `
+    <div class="step-anim">
+      <span class="eyebrow">ผลการประเมินของคุณ</span><br>
+      <span class="result-code">${code}</span>
+      <div class="result-name">${c.name}</div>
+      <div class="result-sub">${c.sub}</div>
+      <div class="price-line">
+        <span class="price">${c.price}<small> บาท</small></span>
+        ${c.save ? `<span class="save-badge">★ ${c.save}</span>` : ""}
+      </div>
+      <div class="date-line">🗓️ ${c.date} • ${CONFIG.monthLabel}</div>
+      <div class="why-box">
+        <b>ทำไมถึงแนะนำคอร์สนี้ให้คุณ</b>
+        <ul>${reasonsFor(code).map(x=>`<li>${x}</li>`).join("")}</ul>
+      </div>
+      ${code === "EXAI-DUO" ? `<p class="hint" style="text-align:left; margin:-8px 0 14px;">💡 งบจำกัด? เริ่มที่คอร์ส 1 (1,890 บาท) ก่อน แล้วค่อยต่อคอร์ส 2 รอบหน้าได้ครับ</p>` : ""}
+
+      <button class="btn btn-amber" onclick="makeImage('${code}')">📸 บันทึกรูปผลลัพธ์ → ส่งในแชท</button>
+      <button class="btn btn-ghost" onclick="copyResult('${code}')">คัดลอกข้อความผลลัพธ์</button>
+      <div class="why-box" style="margin-top:10px; margin-bottom:0;">
+        <b>📱 ขั้นตอนต่อไป</b><br>
+        เซฟรูปหรือคัดลอกข้อความด้านบน แล้ว<b>กดกลับไปที่แชท ${CH === "tt" ? "TikTok" : "Messenger"} เดิม</b>ส่งมาได้เลย ทีมงานจะยืนยันที่นั่งให้ทันทีครับ
+      </div>
+
+      <div class="section">
+        <div class="section-title">ตารางอบรม</div>
+        ${calendarHTML()}
+      </div>
+
+      <div class="section">
+        <div class="section-title">สิ่งที่คุณจะได้รับ</div>
+        <div class="benefit-grid">
+          ${CONFIG.benefits.map(b=>`<div class="benefit"><span class="tick">✓</span>${b}</div>`).join("")}
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">ผู้สอน</div>
+        ${coachHTML()}
+      </div>
+
+      ${reviewsHTML()}
+
+      <div class="section">
+        <div class="section-title">คำถามที่ถามกันบ่อย</div>
+        ${CONFIG.qa.map(x=>`
+          <details class="qa"><summary>${x.q}</summary><div class="a">${x.a}</div></details>
+        `).join("")}
+      </div>
+
+      <div class="section">
+        <button class="btn btn-amber" onclick="copyResult('${code}')">📋 คัดลอกข้อความจอง → ส่งในแชท</button>
+        <button class="btn btn-ghost" onclick="startQuiz()">ทำแบบประเมินใหม่</button>
+      </div>
+    </div>`;
+  v.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ── Copy text (รองรับ in-app browser ที่ไม่มี clipboard API) ── */
+function copyText(text){
+  if(navigator.clipboard && window.isSecureContext){
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((resolve, reject)=>{
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
+    ta.setAttribute("readonly", "");
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    ta.setSelectionRange(0, text.length);
+    let ok = false;
+    try{ ok = document.execCommand("copy"); }catch(e){}
+    ta.remove();
+    ok ? resolve() : reject();
+  });
+}
+
+function copyResult(code){
+  const c = CONFIG.courses[code];
+  const text = `ผลประเมิน OFFICEMAN Excel + AI\nรหัส: ${code}\n${c.name}\nราคา ${c.price} บาท${c.save?` (${c.save})`:""}\n${c.date}\n\n${c.chat}`;
+  copyText(text).then(
+    ()=>toast("คัดลอกแล้ว วางในแชทได้เลย ✓"),
+    ()=>{
+      // ชั้นสุดท้าย: โชว์ข้อความให้กดค้างคัดลอกเอง
+      prompt("กดค้างเพื่อคัดลอกข้อความนี้", text);
+    }
+  );
+}
+
+function toast(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2200);
+}
+
+/* ── Result image (canvas) ── */
+async function makeImage(code){
+  await document.fonts.ready;
+  const c = CONFIG.courses[code];
+  const W = 1080, H = 1080;
+  const cv = document.createElement("canvas");
+  cv.width = W; cv.height = H;
+  const x = cv.getContext("2d");
+
+  // background + grid (warm ivory)
+  x.fillStyle = "#FAF7EF"; x.fillRect(0,0,W,H);
+  x.strokeStyle = "#EDE8DB"; x.lineWidth = 2;
+  for(let i=0;i<=W;i+=90){ x.beginPath(); x.moveTo(i,0); x.lineTo(i,H); x.stroke(); }
+  for(let j=0;j<=H;j+=90){ x.beginPath(); x.moveTo(0,j); x.lineTo(W,j); x.stroke(); }
+
+  // top bar (deep forest) + wordmark
+  x.fillStyle = "#0F3D2E"; x.fillRect(0,0,W,130);
+  x.fillStyle = "#FFFFFF";
+  x.font = "800 46px 'Poppins', sans-serif";
+  x.fillText("OFFICE", 60, 84);
+  const w1 = x.measureText("OFFICE").width;
+  x.fillStyle = "#FFC107";
+  x.fillRect(60 + w1 + 14, 62, 44, 10);
+  x.fillStyle = "#FFFFFF";
+  x.fillText("MAN", 60 + w1 + 14 + 44 + 14, 84);
+  x.font = "500 26px 'Prompt', sans-serif";
+  x.fillStyle = "rgba(255,255,255,.75)";
+  x.textAlign = "right";
+  x.fillText("Excel + AI Workshop", W-60, 80);
+  x.textAlign = "left";
+
+  // white card
+  const cardX=70, cardY=200, cardW=W-140, cardH=740;
+  x.fillStyle = "#FFFFFF";
+  x.strokeStyle = "#E2E5DA"; x.lineWidth = 3;
+  roundRect(x, cardX, cardY, cardW, cardH, 28); x.fill(); x.stroke();
+  // amber top accent on card
+  x.fillStyle = "#FFC107";
+  roundRect(x, cardX+56, cardY+52, 70, 12, 6); x.fill();
+
+  // eyebrow
+  x.fillStyle = "#2E7D4F";
+  x.font = "600 34px 'Prompt', sans-serif";
+  x.fillText("ผลการประเมินของฉัน", cardX+56, cardY+120);
+
+  // code chip
+  x.fillStyle = "#1A1A1A";
+  roundRect(x, cardX+56, cardY+150, 310, 72, 14); x.fill();
+  x.fillStyle = "#FFC107";
+  x.font = "700 42px 'Poppins', sans-serif";
+  x.fillText(code, cardX+56+34, cardY+150+50);
+
+  // course name (wrap)
+  x.fillStyle = "#0F3D2E";
+  x.font = "700 50px 'Prompt', sans-serif";
+  wrapText(x, c.name, cardX+56, cardY+310, cardW-112, 68);
+
+  // price
+  x.fillStyle = "#0F3D2E";
+  x.font = "800 96px 'Poppins', sans-serif";
+  x.fillText(c.price, cardX+56, cardY+530);
+  const pw = x.measureText(c.price).width;
+  x.font = "600 44px 'Prompt', sans-serif";
+  x.fillText("บาท", cardX+56+pw+20, cardY+530);
+  if(c.save){
+    x.fillStyle = "#8A6400";
+    x.font = "700 36px 'Prompt', sans-serif";
+    x.fillText("★ " + c.save, cardX+56, cardY+596);
+  }
+
+  // date
+  x.fillStyle = "#55655B";
+  x.font = "500 36px 'Prompt', sans-serif";
+  wrapText(x, c.date + " • " + CONFIG.monthLabel, cardX+56, cardY+666, cardW-112, 52);
+
+  // footer strip (amber, charcoal text)
+  x.fillStyle = "#FFC107";
+  roundRect(x, 70, H-110, W-140, 80, 40); x.fill();
+  x.fillStyle = "#1A1A1A";
+  x.font = "700 38px 'Prompt', sans-serif";
+  x.textAlign = "center";
+  x.fillText("ส่งรูปนี้ในแชทเพื่อจองที่นั่งได้เลย", W/2, H-58);
+  x.textAlign = "left";
+
+  const url = cv.toDataURL("image/png");
+  // try direct download first
+  try{
+    const a = document.createElement("a");
+    a.href = url; a.download = `officeman-${code}.png`;
+    document.body.appendChild(a); a.click(); a.remove();
+  }catch(e){}
+  // always also show modal for long-press save (FB in-app browser)
+  $("resultImg").src = url;
+  $("imgModal").classList.add("show");
+}
+
+function roundRect(x, px, py, w, h, r){
+  x.beginPath();
+  x.moveTo(px+r, py);
+  x.arcTo(px+w, py, px+w, py+h, r);
+  x.arcTo(px+w, py+h, px, py+h, r);
+  x.arcTo(px, py+h, px, py, r);
+  x.arcTo(px, py, px+w, py, r);
+  x.closePath();
+}
+
+function wrapText(x, text, px, py, maxW, lineH){
+  const words = text.split(" ");
+  let line = "", yy = py;
+  for(const w of words){
+    const test = line ? line + " " + w : w;
+    if(x.measureText(test).width > maxW && line){
+      x.fillText(line, px, yy); line = w; yy += lineH;
+    } else { line = test; }
+  }
+  x.fillText(line, px, yy);
+}
+
+function closeModal(){
+  $("imgModal").classList.remove("show");
+  toast("อย่าลืมกลับไปส่งรูปในแชทนะครับ 🙌");
+}
+$("imgModal").addEventListener("click", e=>{ if(e.target === $("imgModal")) closeModal(); });
+</script>
+</body>
+</html>
