@@ -429,6 +429,8 @@ footer small{font-size:.85rem}
 .adm-sec .hint{font-size:.78rem;color:var(--muted)}
 .adm-tabs button{white-space:nowrap}
 @media (max-width:560px){.adm-tabs{overflow-x:auto;flex-wrap:nowrap}.adm-tabs button{padding:5px 10px;font-size:.88rem}}
+.picked{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-size:.82rem;background:var(--hi-soft);border-radius:999px;padding:3px 6px 3px 12px;margin-top:4px}
+.picked button{border:0;background:none;cursor:pointer;font-size:1rem;line-height:1;color:var(--muted);padding:0 4px}
 </style>
 
 <header class="top">
@@ -581,8 +583,9 @@ footer small{font-size:.85rem}
         <div class="f"><label for="phone">เบอร์โทร <span class="req">*</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx" required><span class="err" id="e-phone"></span></div>
         <div class="f"><label for="email">อีเมล</label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@company.com"><span class="err" id="e-email"></span></div>
         <div class="f"><label for="company">บริษัท / หน่วยงาน</label><input id="company" name="company" autocomplete="organization"></div>
-        <div class="f"><label for="course">คอร์สที่สนใจ <span class="req">*</span></label><select id="course" name="course" required></select><span class="err" id="e-course"></span></div>
-        <div class="f"><label for="round">วันที่สนใจเรียน</label><select id="round" name="round"></select></div>
+        <div class="f"><label for="course">คอร์สที่สนใจ <span class="req">*</span></label><select id="course" name="course" required></select><span class="err" id="e-course"></span><span class="picked" id="roundNote" hidden></span><input type="hidden" id="round" name="round"></div>
+        <div class="f"><label for="decide">จะตัดสินใจเรียนภายในเมื่อไหร่ <span class="req">*</span></label><select id="decide" name="decide" required>
+          <option value="">— เลือก —</option><option>ภายในสัปดาห์นี้</option><option>ภายใน 1 เดือน</option><option>ภายใน 3 เดือน</option><option>มากกว่า 3 เดือน</option><option>ยังไม่แน่ใจ</option></select><span class="err" id="e-decide"></span></div>
         <div class="f"><label for="seats">จำนวนผู้เรียน</label><input id="seats" name="seats" type="number" min="1" max="500" value="1" inputmode="numeric"></div>
         <div class="f"><label for="ctime">สะดวกให้ติดต่อช่วงไหน</label><select id="ctime" name="contact_time"><option>เวลาไหนก็ได้</option><option>ช่วงเช้า 9:00–12:00</option><option>ช่วงบ่าย 13:00–17:00</option><option>หลังเลิกงาน 17:00–19:00</option></select></div>
         <div class="f full"><label for="note">รายละเอียดเพิ่มเติม</label><textarea id="note" name="note" placeholder="เช่น อยากเน้นสูตรที่ใช้ทำรายงานยอดขาย หรือต้องการใบเสนอราคาในนามบริษัท"></textarea></div>
@@ -949,11 +952,16 @@ function fillCourseSelect(){
   $("#course").innerHTML = `<option value="">— เลือกคอร์ส —</option>` + COURSES.map(c=>`<option value="${esc(c.id)}">${esc(c.title)}</option>`).join("") + `<option value="other">ยังไม่แน่ใจ / หลายคอร์ส</option>`;
   if(v && [...$("#course").options].some(o=>o.value===v)) $("#course").value = v;
 }
-function fillRoundSelect(){
-  const c = COURSES.find(x=>x.id===$("#course").value);
-  const rs = c ? roundsOf(c) : [];
-  $("#round").innerHTML = `<option value="">ยังไม่ระบุวัน</option>` + rs.map(r=>`<option value="${r.date}">${esc(roundLabel(r))}${r.status==="เต็มแล้ว"?" (เต็ม · ลงชื่อรอคิว)":""}</option>`).join("") + `<option value="อบรมในองค์กร">นัดวันอบรมในองค์กร</option>`;
+// วันที่ลูกค้ากดเลือกในหน้าคอร์ส (ไม่บังคับ) เก็บไว้ในช่องซ่อน แล้วแสดงเป็นป้ายใต้ช่องคอร์ส
+function setRound(v){
+  $("#round").value = v || "";
+  const c = COURSES.find(x=>x.id===$("#course").value), r = c && ALL.find(x => x.c.id===c.id && x.date===v);
+  const note = $("#roundNote");
+  if(r){ note.innerHTML = `วันที่เลือกไว้: <b>${esc(fmtShort(r.date))}</b>${r.where?" · "+esc(r.where):""} <button type="button" id="roundClear" aria-label="ไม่ระบุวัน">×</button>`; note.hidden = false; }
+  else { if(v!=="อบรมในองค์กร") $("#round").value = ""; note.hidden = true; note.innerHTML = ""; }
 }
+function fillRoundSelect(){ setRound($("#round").value); }
+$("#roundNote").addEventListener("click", e => { if(e.target.id==="roundClear"){ setRound(""); document.querySelectorAll("#dRounds .pick").forEach(x=>x.setAttribute("aria-pressed", false)); } });
 $("#course").addEventListener("change", fillRoundSelect);
 
 /* ---- detail view ---- */
@@ -981,13 +989,13 @@ function renderDetail(c){
   txt("dPickHint", rs.length > 1 ? `มี ${rs.length} วันให้เลือก เลือกได้ 1 วัน` : rs.length ? "กดเลือกวัน แล้วกดขอราคา" : "");
   $("#dRounds").innerHTML = rs.length ? rs.map(r=>{ const [bc,bt]=badgeOf(r); return `<button class="pick" type="button" data-date="${r.date}" aria-pressed="${r.date===pick}"><span class="dt">${fmt(r.date)}<small>${esc([r.time, r.where].filter(Boolean).join(" · ") || "เรียน 1 วัน")}</small></span>${bt!=="เปิดรับ"?`<span class="seat ${bc}">${bt}</span>`:""}</button>`; }).join("") : `<p class="note">ยังไม่มีรอบเปิดสาธารณะ สอบถามรอบอบรมในองค์กรได้</p>`;
   txt("mbarT", c.short||c.title); txt("mbarP", p.now ? `${p.early?"Early Bird ":""}${p.now}` : "สนใจคอร์สนี้?");
-  $("#course").value = c.id; fillRoundSelect(); if(pick) $("#round").value = pick;
+  $("#course").value = c.id; setRound(pick || "");
   pendingRound = null;
 }
 $("#dRounds").addEventListener("click", e => {
   const b = e.target.closest(".pick"); if(!b) return;
   document.querySelectorAll("#dRounds .pick").forEach(x=>x.setAttribute("aria-pressed", x===b));
-  $("#round").value = b.dataset.date;
+  setRound(b.dataset.date);
 });
 
 /* ---- router (bare #tokens) ---- */
@@ -1024,6 +1032,7 @@ function renderAll(keepScroll){ derive(); renderSite(); renderChips(); renderGri
 
 /* ---- lead submit ---- */
 const leadForm = $("#leadForm");
+["input","change"].forEach(t => leadForm.addEventListener(t, e => { const id = e.target.id; const er = document.getElementById("e-"+id); if(er && er.textContent){ er.textContent = ""; e.target.removeAttribute("aria-invalid"); } }));
 if(!hasServer()) $("#demoNote").hidden = false;
 function setErr(id,msg){ $("#e-"+id).textContent = msg||""; const el=$("#"+id); if(el) el.setAttribute("aria-invalid", !!msg); }
 leadForm.addEventListener("submit", async e => {
@@ -1036,6 +1045,7 @@ leadForm.addEventListener("submit", async e => {
   const pOk = /^(\+?66|0)\d{8,9}$/.test(phone); setErr("phone", pOk?"":"กรุณากรอกเบอร์โทร 9–10 หลัก เช่น 0812345678"); if(!pOk) ok=false;
   const eOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); setErr("email", eOk?"":"รูปแบบอีเมลไม่ถูกต้อง"); if(!eOk) ok=false;
   setErr("course", f.get("course")?"":"กรุณาเลือกคอร์ส"); if(!f.get("course")) ok=false;
+  setErr("decide", f.get("decide")?"":"กรุณาเลือกช่วงเวลา"); if(!f.get("decide")) ok=false;
   setErr("consent", f.get("consent")?"":"กรุณากดยินยอมก่อนส่งข้อมูล"); if(!f.get("consent")) ok=false;
   if(!ok){ leadForm.querySelector('[aria-invalid="true"]')?.focus(); return; }
   const c = COURSES.find(x=>x.id===f.get("course"));
@@ -1043,7 +1053,7 @@ leadForm.addEventListener("submit", async e => {
   const rObj = c && ALL.find(r => r.c.id===c.id && r.date===rv);
   const payload = {
     type: f.get("type"), course: c ? c.title : "ยังไม่แน่ใจ / หลายคอร์ส",
-    round: rObj ? roundLabel(rObj) : (rv || "ยังไม่ระบุ"),
+    round: [f.get("decide"), rObj ? "เลือกวัน " + roundLabel(rObj) : (rv==="อบรมในองค์กร" ? "อบรมในองค์กร" : "")].filter(Boolean).join(" · "),
     name, phone, email, company: (f.get("company")||"").trim(), seats: f.get("seats")||"1",
     contact_time: f.get("contact_time"), note: (f.get("note")||"").trim(),
     page: location.hash || "#home", submitted_at: new Date().toISOString()
@@ -1057,7 +1067,7 @@ leadForm.addEventListener("submit", async e => {
       <h3>ได้รับข้อมูลแล้ว ขอบคุณครับคุณ${esc(name)}</h3>
       <p>ทีม Office Man จะติดต่อกลับที่เบอร์ ${esc(phone)}<br>เรื่อง: ${esc(payload.type)} · ${esc(payload.course)}</p>
       <a class="btn btn-ghost" href="#courses" style="margin-top:6px">ดูคอร์สอื่นต่อ</a>`;
-    leadForm.reset(); leadForm.hidden = true; done.hidden = false;
+    leadForm.reset(); setRound(""); leadForm.hidden = true; done.hidden = false;
     btn.disabled = false; $("#status").textContent = "";
   }catch(err){
     btn.disabled = false;
